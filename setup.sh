@@ -66,7 +66,7 @@ PKGLIST=""
 install_general
 install_development
 install_internet
-
+copy_scripts_to_home_directory
 
 
 
