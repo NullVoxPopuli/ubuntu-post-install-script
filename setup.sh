@@ -11,6 +11,8 @@
 # - Material Paper GTK Theme
 #   http://itsfoss.com/install-paper-theme-linux/
 # - Gnome
+# - Veromix
+# - Gimp
 #
 # Development:
 # - RVM
@@ -26,6 +28,10 @@
 # 
 # Internet:
 # - Google Chrome (deb)
+# - WeeChat
+#   https://help.ubuntu.com/community/WeeChat
+# - Bleep (when it comes out for linux)
+# - FileZilla
 #
 # Additional Setup:
 # - copies helper scripts
@@ -47,19 +53,20 @@
 ########################
 source $(dirname $0)/colors.sh
 source $(dirname $0)/helper-functions.sh
+source $(dirname $0)/splash-message.sh
+source $(dirname $0)/install/general.sh
 
 #####################################
 # Start Building Install Package List
 #####################################
 PKGLIST=""
 
-#######
-# Gnome
-add_package "gnome"
+install_general
+install_development
+install_3d_printing
+install_internet
 
-# Note about installing Material Paper Theme
-add_repo "ppa:snwh/pulp"
-add_package "paper-gtk-theme paper-icon-theme"
+
 
 
 #############
