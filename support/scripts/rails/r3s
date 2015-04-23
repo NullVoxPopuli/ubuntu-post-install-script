@@ -1,0 +1,2 @@
+mailcatcher;
+bundle exec rails s -p ${1:-3000};

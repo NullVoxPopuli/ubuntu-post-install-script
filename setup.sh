@@ -5,7 +5,7 @@
 #
 # By default, everything is accepted.
 # It is assumed that the host system is 64bit.
-# 
+#
 # Installs Programs:
 # System:
 # - Material Paper GTK Theme
@@ -20,12 +20,12 @@
 # - Latest Stable Ruby
 # - Atom editor (deb)
 #   https://github.com/atom/atom
-# 
+#
 # 3D Printing:
 # - Cura (deb)
 #   https://software.ultimaker.com
 #   https://github.com/daid/Cura
-# 
+#
 # Internet:
 # - Google Chrome (deb)
 # - WeeChat
@@ -45,16 +45,18 @@
 #   - Includes helper scripts in $PATH
 # - creates organization dev folders:
 #   - ~/Development
-#   - ~/OpenSource 
+#   - ~/OpenSource
 #
 
 ########################
 # Include Helper Scripts
 ########################
-source $(dirname $0)/colors.sh
-source $(dirname $0)/helper-functions.sh
-source $(dirname $0)/splash-message.sh
-source $(dirname $0)/install/general.sh
+source $(dirname $0)/support/colors.sh
+source $(dirname $0)/support/helper-functions.sh
+source $(dirname $0)/support/splash-message.sh
+source $(dirname $0)/support/install/general.sh
+source $(dirname $0)/support/install/development.sh
+source $(dirname $0)/support/install/internet.sh
 
 #####################################
 # Start Building Install Package List
@@ -63,7 +65,6 @@ PKGLIST=""
 
 install_general
 install_development
-install_3d_printing
 install_internet
 
 
@@ -74,12 +75,12 @@ install_internet
 #############
 
 ########
-# Update 
+# Update
 sudo apt-get update
 
 #########
 # Install
-sudo apt-get install $APT_PACKAGES_TO_INSTALL 
+sudo apt-get install $APT_PACKAGES_TO_INSTALL
 
 ################
 # Create Folders

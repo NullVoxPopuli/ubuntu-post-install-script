@@ -1,4 +1,4 @@
-
+#!/bin/bash
 # https://wiki.archlinux.org/index.php/Color_Bash_Prompt
 # Reset
 Color_Off='\e[0m'       # Text Reset

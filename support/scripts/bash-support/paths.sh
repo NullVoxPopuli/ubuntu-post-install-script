@@ -1,0 +1,6 @@
+PATH="$HOME/scripts:$PATH"
+PATH="$HOME/scripts/rails:$PATH"
+PATH="$HOME/scripts/system-utils:$PATH"
+PATH="$HOME/apps/phantomjs/bin:$PATH"
+PATH="$HOME/apps/android-development/adt-bundle-linux-x86_64-20130717/sdk/platform-tools:$PATH"
+PATH="$HOME/apps/android-development/adt-bundle-linux-x86_64-20130717/sdk/tools:$PATH"

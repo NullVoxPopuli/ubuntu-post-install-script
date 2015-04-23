@@ -1,0 +1,2 @@
+bundle exec pry -r ./config/environment.rb
+

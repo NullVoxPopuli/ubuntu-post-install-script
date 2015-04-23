@@ -1,0 +1,159 @@
+#!/bin/bash
+# --------------------------------------------
+#  Video Shooting Stabilization
+#  Command-line & Nautilus script
+#  Depends on :
+#   * mlt 0.7.6 minimum
+#   * ffmpeg 0.9 minimum
+#   * yad
+#  Revision history :
+#  04/03/2012 - Creation by N. Bernaerts
+#  04/04/2012 - Add codecs as parameters
+# -------------------------------------------
+
+# ----------------------------------------------------
+#  User variable section
+#  Please, do not modify anything out of this section 
+# ----------------------------------------------------
+
+# You can define default encoding codec and rates in kbits/s
+VIDEO_CODEC="libx264"
+VIDEO_RATE=5000
+AUDIO_CODEC="libmp3lame"
+AUDIO_RATE=128
+
+# You can setup optional parameters for stabilization & h264 encoding
+OPTION_STABILIZER="shakiness=4"
+OPTION_ENCODER="tune=film preset=slow"
+
+# ------------------------------------
+#  check if script is called 
+#  as command-line or nautilus-script 
+# ------------------------------------
+if [ -n "$1" ] 
+then
+  # at least one parameter, called as command-line
+  FILE_PATH="$1"
+else
+  # no parameter, called as a nautilus script
+  FILE_PATH="${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS}"
+fi
+
+# ----------------
+#  Initialisation 
+# ----------------
+STABILIZE="TRUE"
+CANCELED="FALSE"
+
+# go in the video file directory
+cd $(dirname "${FILE_PATH}")
+
+# generate the filenames
+ORIGINAL=$(basename "${FILE_PATH}")
+FILE_NAME=`echo ${ORIGINAL} | sed 's/^\(.*\)[.].*$/\1/g'`
+FILE_STAB="${FILE_NAME}"-stab.mp4
+FILE_LOG="${FILE_NAME}".log
+FILE_MLT="${FILE_NAME}".mlt
+
+# --------------------------------------------
+#  function to follow progress of the process 
+# --------------------------------------------
+MELT_PROGRESS()
+{
+# loop till the end of melt process
+PERCENTAGE=0
+while [ "$PERCENTAGE" != "100" ] 
+do    
+  # wait for 1 second
+  sleep 1
+
+  # if process is still running
+  RESULT=`ps aux | awk '{print $2 }' | grep $PID`
+  if [ "$RESULT" -eq "$PID" ] 
+  then
+    # get percentage of completion
+    PERCENTAGE=`cat "${FILE_LOG}" | tail -n 1 | sed 's/^.*percentage:[ ]*\([0-9]*\).*$/\1/g'`
+  else
+    # else, force percentage to 100
+    PERCENTAGE="100"
+  fi  
+
+  # display current percentage
+  echo $PERCENTAGE
+done | yad --width=400 --height=30 --progress --auto-close --title "$TITLE" --text "$TEXT"
+
+# if encode has been canceled, kill the current process
+CANCELED="FALSE"
+RESULT=`ps aux | awk '{print $2 }' | grep $PID`
+if [ "$RESULT" -eq "$PID" ] 
+then 
+  kill $PID
+  CANCELED="TRUE"
+fi
+}
+
+# -----------------------------------
+#  Selection of encoding parameters
+# -----------------------------------
+TITLE="Stabilization of ${ORIGINAL}"
+TEXT="\nFinal video file will use $VIDEO_CODEC video and $AUDIO_CODEC audio.\nPlease select the encoding parameters :\n"
+CHOICE=`yad  --title "$TITLE" --text "$TEXT" --image "dialog-question" --form --field=Stabilize:CHK ${STABILIZE} --field="Video bitrate (kbits):NUM" ${VIDEO_RATE} --field="Audio bitrate (kbits):NUM" ${AUDIO_RATE}`
+
+# extract the parameters
+STABILIZE=`echo ${CHOICE}  | cut -d"|" -f1`
+VIDEO_RATE=`echo ${CHOICE} | cut -d"|" -f2 | cut -d"," -f1 | cut -d"." -f1`
+AUDIO_RATE=`echo ${CHOICE} | cut -d"|" -f3 | cut -d"," -f1 | cut -d"." -f1`
+
+# -------------------------
+#  Phase 1 : Stabilization
+# -------------------------
+if [ "$STABILIZE" = "TRUE" ]
+then 
+  # set text & title of progress window
+  TITLE="1 - Stabilization of ${ORIGINAL}"
+  TEXT="This phase may take a long time ...\n"
+
+  # start the stabilization phase with melt and videostab2 filter
+  melt -progress "${ORIGINAL}" -filter videostab2 ${OPTION_STABILIZER} -consumer xml:"${FILE_MLT}" all=1 real_time=-2 2>"${FILE_LOG}" &
+
+  # get the process id
+  PID=`ps -ef | grep melt | grep "${ORIGINAL}" | sed 's/^'$USER'[ ]*\([0-9]*\).*$/\1/g'`
+  
+  # follow the stabilization progress
+  MELT_PROGRESS
+fi
+
+# if canceled, no encoding to be done
+if [ "$CANCELED" = "TRUE" ] 
+then 
+  VIDEO_RATE=0
+fi
+
+# --------------------
+#  Phase 2 : Encoding
+# --------------------
+if [ "$VIDEO_RATE" -gt "0" ] 
+then 
+   # set text & title of progress window
+  TITLE="2 - Encoding of ${FILE_STAB}"
+  TEXT="This phase may also take a long time ...\n"
+
+  # start melt encoding process with stabilized video and original audio
+  melt -progress "${FILE_MLT}" -audio-track "${ORIGINAL}" -consumer avformat:"${FILE_STAB}" vcodec=${VIDEO_CODEC} b=${VIDEO_RATE}k acodec=${AUDIO_CODEC} ab=${AUDIO_RATE}k ${OPTION_ENCODER} 2>"${FILE_LOG}" &
+
+  # get the process id
+  PID=`ps -ef | grep melt | grep "${FILE_MLT}" | sed 's/^'$USER'[ ]*\([0-9]*\).*$/\1/g'`
+  
+  # follow the stabilization progress
+  MELT_PROGRESS
+fi
+
+# ------------------------------------
+#  cleaning-up of all temporary files
+# ------------------------------------
+rm "${FILE_LOG}"
+rm "${FILE_MLT}"
+
+exit 0
+
+
