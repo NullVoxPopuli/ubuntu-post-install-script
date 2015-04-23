@@ -1,2 +1,12 @@
 # post-install-script
-I've had to set up a lot of Ubuntu systems, and I'm tired of it! AUTOMATE!
+
+## Instructions
+
+Download the zip file and unzip anywhere on your Ubuntu computer
+run
+
+    ./setup
+    
+To get all of my personal preferences and programs.
+
+I'll be adding configurable parameters later.
