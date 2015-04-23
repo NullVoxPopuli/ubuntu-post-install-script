@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # Fresh Install Script for Ubuntu
 #  By NullVoxPopuli / Preston Sego
 #
@@ -40,20 +42,46 @@
 #   - ~/OpenSource 
 #
 
+########################
+# Include Helper Scripts
+########################
+source $(dirname $0)/colors.sh
+source $(dirname $0)/helper-functions.sh
+
 #####################################
 # Start Building Install Package List
+#####################################
 PKGLIST=""
 
 #######
 # Gnome
-PKGLIST = "$PKGLIST gnome"
+add_package "gnome"
 
 # Note about installing Material Paper Theme
-sudo add-apt-repository ppa:snwh/pulp
-PKGLIST = "$PKGLIST paper-gtk-theme paper-icon-theme"
+add_repo "ppa:snwh/pulp"
+add_package "paper-gtk-theme paper-icon-theme"
 
+
+#############
+# Finally....
+#############
+
+########
 # Update 
 sudo apt-get update
 
+#########
 # Install
-sudo apt-get install $PKGLIST
+sudo apt-get install $APT_PACKAGES_TO_INSTALL 
+
+################
+# Create Folders
+################
+# All personal development here
+mkdir ~/Development
+# All projects not created by me here
+mkdir ~/OpenSource
+# Folder for the desktop to cycle through pictures I like
+mkdir ~/Pictures/Backgruonds
+# .bash_profile will include everything in here
+mkdir ~/Scripts
