@@ -15,3 +15,10 @@ function echo_with_color {
 function add_package {
   APT_PACKAGES_TO_INSTALL = "$APT_PACKAGES_TO_INSTALL $1"
 }
+
+# alias for sudo add-apt-repository
+#
+# $1 - Repository
+function add_repo{
+   sudo add-apt-repository $1
+}
