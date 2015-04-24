@@ -12,6 +12,8 @@ To get all of my personal preferences and programs.
 
 I'll be adding configurable parameters later.
 
+Hopefully all of the install methods for the non-apt packages change less frequently than I need to create Ubuntu instances.
+
 
 ## What's Included?
 
