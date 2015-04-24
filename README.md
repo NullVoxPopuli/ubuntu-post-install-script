@@ -80,3 +80,10 @@ Hopefully all of the install methods for the non-apt packages change less freque
   - creates organization dev folders:
     - ~/Development
     - ~/OpenSource
+
+## Contributing
+
+  - Fork
+  - Code
+  - Pull Request
+  - :-)
