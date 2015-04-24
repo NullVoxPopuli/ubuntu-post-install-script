@@ -7,12 +7,21 @@
 # It is assumed that the host system is 64bit.
 #
 # Installs Programs:
-# System:
+# General:
+# - Gnome
 # - Material Paper GTK Theme
 #   http://itsfoss.com/install-paper-theme-linux/
-# - Gnome
+# - Ceti-2 Theme
+#   https://github.com/horst3180/Ceti-2-theme
 # - Veromix
 # - Gimp
+# - Clementine
+# - Kdenlive
+# - gparted
+# - grub customizer
+# - VLC
+# - WinUSB
+# - VirtualBox
 #
 # Development:
 # - RVM
@@ -20,6 +29,7 @@
 # - Latest Stable Ruby
 # - Atom editor (deb)
 #   https://github.com/atom/atom
+# - PostgreSql
 #
 # 3D Printing:
 # - Cura (deb)
@@ -32,6 +42,7 @@
 #   https://help.ubuntu.com/community/WeeChat
 # - Bleep (when it comes out for linux)
 # - FileZilla
+# - Firefox
 #
 # Additional Setup:
 # - copies helper scripts
