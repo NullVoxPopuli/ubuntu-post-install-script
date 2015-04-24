@@ -5,3 +5,23 @@
 function copy_scripts_to_home_directory(){
   cp ../../resources/home/* ~/ -R
 }
+
+
+function create_folders(){
+    # All personal development here
+  mkdir ~/Development
+  # All projects not created by me here
+  mkdir ~/OpenSource
+  # Folder for the desktop to cycle through pictures I like
+  mkdir ~/Pictures/Backgrounds
+  # .bash_profile will include everything in here
+  mkdir ~/Scripts
+
+}
+
+# Install helper scripts that I find make life easier
+# Also creates common folders
+function setup_home_directory(){
+  create_folders
+  copy_scripts_to_home_directory
+}
