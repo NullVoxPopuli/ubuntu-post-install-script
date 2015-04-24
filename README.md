@@ -53,9 +53,8 @@ I'll be adding configurable parameters later.
     - Meld
 
   - 3D Printing
-    - Cura
-      https://software.ultimaker.com
-      https://github.com/daid/Cura
+    - [Cura](https://github.com/daid/Cura) by [Ultimaker](https://software.ultimaker.com)
+      
 
   - Internet
     - Google Chrome
