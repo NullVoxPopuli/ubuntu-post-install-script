@@ -5,7 +5,7 @@
 # $1 - Color
 # $2 - Text
 function echo_with_color() {
-   echo $1$2$Color_Off
+   echo -e $1$2$Color_Off
 }
 
 # Appends the given package names to the variable that is
@@ -27,11 +27,8 @@ function add_repo(){
 #
 # $1 - The directory relative to the directory setup.sh is ran from
 function include_directory(){
-  echo "param "
-  echo "$1\n"
   for file in $1 ; do
     if [ -f "$file" ] ; then
-      echo "$file - `pwd` \n"
       . "$file"
     fi
   done

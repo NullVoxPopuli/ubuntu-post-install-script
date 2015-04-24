@@ -72,8 +72,10 @@
 # All scripts need access to these
 ##################################
 APT_PACKAGES_TO_INSTALL=""
-DOWNLOAD_PATH="#(dirname $0)/tmp"
+DOWNLOAD_PATH="tmp"
 
+# create directory for downloaded files to go in.
+mkdir $DOWNLOAD_PATH
 
 ########################
 # Include Helper Scripts
@@ -84,16 +86,14 @@ source $(dirname $0)/support/splash-message.sh
 
 include_directory "$(dirname $0)/support/install/*"
 
+
+display_splash
+
+
 #####################################
 # Start Building Install Package List
 #####################################
 
-# Display Splash
-splash
-
-
-# create directory for downloaded files to go in.
-mkdir "#(dirname $0)/tmp"
 
 ######################
 # Install apt packages
@@ -114,15 +114,10 @@ sudo apt-get install $APT_PACKAGES_TO_INSTALL
 install_applications
 
 
-
-# helper scripts that I find make life easier
+#####################################################
+# Install helper scripts that I find make life easier
+#####################################################
 copy_scripts_to_home_directory
-
-
-
-#############
-# Finally....
-#############
 
 
 ################
