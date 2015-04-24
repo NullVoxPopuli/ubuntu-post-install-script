@@ -1,10 +1,9 @@
 #!/bin/bash
 
-source $(dirname $0)/packages/material-theme.sh
-
+include_directory "$(dirname $0)/support/install/packages/*"
 
 # Installs more general system-ish packages
-function install_packages{
+function install_packages(){
   ###############
   # General Tools
   add_package "git vim curl"
@@ -16,4 +15,5 @@ function install_packages{
   ########
   # Others
   setup_material_theme
+  
 }

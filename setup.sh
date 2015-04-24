@@ -68,24 +68,54 @@
 #   - ~/OpenSource
 #
 
+##################################
+# All scripts need access to these
+##################################
+APT_PACKAGES_TO_INSTALL=""
+DOWNLOAD_PATH="#(dirname $0)/tmp"
+
+
 ########################
 # Include Helper Scripts
 ########################
 source $(dirname $0)/support/colors.sh
 source $(dirname $0)/support/helper-functions.sh
 source $(dirname $0)/support/splash-message.sh
-source $(dirname $0)/support/install/general.sh
-source $(dirname $0)/support/install/development.sh
-source $(dirname $0)/support/install/internet.sh
+
+include_directory "$(dirname $0)/support/install/*"
 
 #####################################
 # Start Building Install Package List
 #####################################
-PKGLIST=""
 
-install_general
-install_development
-install_internet
+# Display Splash
+splash
+
+
+# create directory for downloaded files to go in.
+mkdir "#(dirname $0)/tmp"
+
+######################
+# Install apt packages
+######################
+
+# apt-get packages
+install_packages
+# Update
+sudo apt-get update
+# Install
+sudo apt-get install $APT_PACKAGES_TO_INSTALL
+
+#################################
+# Install Downloaded Applications
+#################################
+
+# apps that have to be downloaded and installed 'manually'
+install_applications
+
+
+
+# helper scripts that I find make life easier
 copy_scripts_to_home_directory
 
 
@@ -94,13 +124,6 @@ copy_scripts_to_home_directory
 # Finally....
 #############
 
-########
-# Update
-sudo apt-get update
-
-#########
-# Install
-sudo apt-get install $APT_PACKAGES_TO_INSTALL
 
 ################
 # Create Folders
@@ -110,6 +133,6 @@ mkdir ~/Development
 # All projects not created by me here
 mkdir ~/OpenSource
 # Folder for the desktop to cycle through pictures I like
-mkdir ~/Pictures/Backgruonds
+mkdir ~/Pictures/Backgrounds
 # .bash_profile will include everything in here
 mkdir ~/Scripts
