@@ -22,14 +22,22 @@
 # - VLC
 # - WinUSB
 # - VirtualBox
+# - EtherApe
+# - Audacity
+# - Handbrake
+# - gufw (graphical interface to ufw (firewall))
 #
 # Development:
+# - vim
+# - arduino IDE
 # - RVM
 #   https://rvm.io/rvm/install
 # - Latest Stable Ruby
 # - Atom editor (deb)
 #   https://github.com/atom/atom
 # - PostgreSql
+# - KDiff3
+# - Meld
 #
 # 3D Printing:
 # - Cura (deb)
@@ -43,6 +51,7 @@
 # - Bleep (when it comes out for linux)
 # - FileZilla
 # - Firefox
+# - Tor Browser
 #
 # Additional Setup:
 # - copies helper scripts
