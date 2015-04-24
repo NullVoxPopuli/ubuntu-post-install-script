@@ -19,10 +19,8 @@ I'll be adding configurable parameters later.
 
   - Desktop Environment
     - Gnome
-    - Material Paper GTK Theme
-      http://itsfoss.com/install-paper-theme-linux/
-    - Ceti-2 Theme
-      https://github.com/horst3180/Ceti-2-theme
+    - [Material Paper GTK Theme](http://itsfoss.com/install-paper-theme-linux/)
+    - [Ceti-2 Theme](https://github.com/horst3180/Ceti-2-theme)
 
   - Media
     - Audio
@@ -47,11 +45,9 @@ I'll be adding configurable parameters later.
   - Development
     - vim
     - arduino IDE
-    - RVM
-      https://rvm.io/rvm/install
+    - [RVM](https://rvm.io/rvm/install)
     - Latest Stable Ruby
-    - Atom editor (deb)
-      https://github.com/atom/atom
+    - [Atom Editor](https://github.com/atom/atom)
     - PostgreSql
     - KDiff3
     - Meld
@@ -63,8 +59,7 @@ I'll be adding configurable parameters later.
 
   - Internet
     - Google Chrome
-    - WeeChat
-      https://help.ubuntu.com/community/WeeChat
+    - [WeeChat](https://help.ubuntu.com/community/WeeChat)
     - Bleep (when it comes out for linux)
     - FileZilla
     - Firefox
