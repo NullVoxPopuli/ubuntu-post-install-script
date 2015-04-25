@@ -14,12 +14,48 @@ function setup_packages(){
   # It's likely this is already installed on all Ubuntu Systems
   add_package "gnupg" 
 
+  add_package "gparted"
+  add_package "gufw"
+  add_package "kdiff3"
+  add_package "meld"
+
+  #############
+  # Development
+  add_package "postgresql"
+  add_package "postgresql-contrib"
+  add_package "pgadmin3"
+  
+  #######
+  # Audio
+  add_package "veromix"
+  add_package "audacity"
+  add_package "clementine"
+  
+  #######
+  # Image
+  add_package "gimp"
+  
+  #######
+  # Video
+  add_package "kdenlive"
+  add_package "vlc"
+  add_package "browser-plugin-vlc"
+  
+  ##########
+  # Internet
+  add_package "firefox"
+  add_package "filezilla"
+  add_package "weechat"
+  add_package "etherape"
+  add_package "vidalia"
+  
   #######
   # Gnome
   add_package "gnome"
 
   ########
   # Others
+  setup_handbrake
   setup_material_theme
   
 }
