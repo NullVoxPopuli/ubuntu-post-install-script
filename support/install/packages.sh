@@ -9,6 +9,7 @@ function setup_packages(){
   add_package "git"
   add_package "vim"
   add_package "curl"
+  add_package "npm"
   
   # gpg is for importing keys for apt-repositories.
   # It's likely this is already installed on all Ubuntu Systems
