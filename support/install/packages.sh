@@ -30,6 +30,7 @@ function setup_packages(){
   add_package "libxslt-dev" 
   add_package "libxml2-dev"
   add_package "libqtwebkit-dev"
+  add_package "libpq-dev"
   
   #######
   # Audio
