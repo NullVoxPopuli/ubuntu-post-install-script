@@ -25,6 +25,11 @@ function setup_packages(){
   add_package "postgresql"
   add_package "postgresql-contrib"
   add_package "pgadmin3"
+  add_package "qt4-qmake"
+  add_package "qt5-qmake"
+  add_package "libxslt-dev" 
+  add_package "libxml2-dev"
+  add_package "libqtwebkit-dev"
   
   #######
   # Audio
