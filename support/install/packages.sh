@@ -54,7 +54,6 @@ function setup_packages(){
   add_package "filezilla"
   add_package "weechat"
   add_package "etherape"
-  add_package "vidalia"
   
   #######
   # Gnome
