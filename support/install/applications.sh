@@ -11,5 +11,8 @@ include_directory "$(dirname $0)/support/install/applications/*"
 function install_applications(){
   
   install_ruby
+  
+  # heroku toolbelt
+  wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
 }
