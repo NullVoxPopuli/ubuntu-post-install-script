@@ -34,8 +34,11 @@ custom_bash_prompt(){
 	local EMC="\[\033[1;36m\]"
 	local EMW="\[\033[1;37m\]"
 	 
-	# username@hostname ip_address
-	export PS1="$EMM\u$EMG@$EMC\h$C \$(__ip_address_ps1) "
+	# username@hostname
+	export PS1="$EMM\u$EMG@$EMC\h "
+	
+	# ip address
+	export PSA1="$PS1$C\$(__ip_address_ps1) "
 
 	# current directory
 	export PS1="$PS1$EMB\w"
@@ -43,10 +46,8 @@ custom_bash_prompt(){
 	# current git branch
 	export PS1="$PS1$Y\$(__git_ps1)"
 
-
 	# current ruby
 	export PS1="$PS1 $R\$(__current_ruby_ps1)"
-
 
 	# little end bit
 	export PS1="$PS1 $G\$ $W"
