@@ -14,9 +14,6 @@ function create_folders(){
   mkdir ~/OpenSource
   # Folder for the desktop to cycle through pictures I like
   mkdir ~/Pictures/Backgrounds
-  # .bash_profile will include everything in here
-  mkdir ~/Scripts
-
 }
 
 # Install helper scripts that I find make life easier
@@ -24,4 +21,6 @@ function create_folders(){
 function setup_home_directory(){
   create_folders
   copy_scripts_to_home_directory
+  # don't need no bashrc
+  rm ~/.bashrc
 }

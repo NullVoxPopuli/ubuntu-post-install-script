@@ -5,12 +5,16 @@ function __current_ruby_ps1 {
 	local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
 	[ "$version" == "1.8.7" ] && version=""
 	local full="$version$gemset"
-	[ "$full" != "" ] && echo "$full"
+	[ "$full" != "" ] && echo "💎  $full"
+}
+
+function __current_node_ps1 {
+	local version=$(node --version)
+	[ "$version" != "" ] && echo "⬡ $version "
 }
 
 function __ip_address_ps1 {
-	#/sbin/ifconfig eth0 | sed -n '0,/^\s\+inet addr:\([0-9]\+[.][0-9]\+[.][0-9]\+[.][0-9]\+\).*$/s//\1/p'
-	/sbin/ifconfig wlan0 | sed -n '0,/^\s\+inet addr:\([0-9]\+[.][0-9]\+[.][0-9]\+[.][0-9]\+\).*$/s//\1/p'
+	hostname -I
 }
 
 custom_bash_prompt(){
@@ -23,7 +27,7 @@ custom_bash_prompt(){
 	local M="\[\033[0;35m\]"    # magenta
 	local C="\[\033[0;36m\]"    # cyan
 	local W="\[\033[0;37m\]"    # white
-	 
+
 	# emphasized (bolded) colors
 	local EMK="\[\033[1;30m\]"
 	local EMR="\[\033[1;31m\]"
@@ -33,24 +37,31 @@ custom_bash_prompt(){
 	local EMM="\[\033[1;35m\]"
 	local EMC="\[\033[1;36m\]"
 	local EMW="\[\033[1;37m\]"
-	 
+
 	# username@hostname
 	export PS1="$EMM\u$EMG@$EMC\h "
-	
+
 	# ip address
-	export PSA1="$PS1$C\$(__ip_address_ps1) "
+	export PS1="$PS1$C\$(__ip_address_ps1) "
 
 	# current directory
 	export PS1="$PS1$EMB\w"
 
-	# current git branch
-	export PS1="$PS1$Y\$(__git_ps1)"
+	# newline
+	export PS1="$PS1\n"
+
+
+	# current node
+	export PS1="$PS1$G\$(__current_node_ps1)"
 
 	# current ruby
-	export PS1="$PS1 $R\$(__current_ruby_ps1)"
+	export PS1="$PS1$R\$(__current_ruby_ps1)"
+
+	# current git branch
+	export PS1="$PS1$Y\$(__git_ps1) "
 
 	# little end bit
-	export PS1="$PS1 $G\$ $W"
+	export PS1="$PS1$G\$ $W"
 }
 
 custom_bash_prompt
@@ -72,4 +83,3 @@ if [ "$PS1" ]; then
 	alias vdir='ls --color=auto --format=long'
 
 fi;
-
