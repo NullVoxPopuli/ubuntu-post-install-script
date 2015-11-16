@@ -9,8 +9,13 @@ function __current_ruby_ps1 {
 }
 
 function __current_node_ps1 {
-	local version=$(node --version)
-	[ "$version" != "" ] && echo "⬡ $version "
+        local node_exists=$(which node)
+
+        if [ -n "$node_exists" ]
+        then
+                local version=$(node --version)
+                [ "$version" != "" ] && echo "⬡ $version "
+        fi
 }
 
 function __ip_address_ps1 {
