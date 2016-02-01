@@ -6,10 +6,13 @@ function install_atom(){
   # then we can skip this install, casue it's already installed!
 
   # retrieve the *.deb
-  curl -L -O https://atom.io/download/deb
+  curl -L -O https://atom.io/download/deb -o
+
+  #rename missnamed download
+  mv deb atom.deb
 
   # install the *.deb
-  sudo dpkg --install atom-amd64.deb
+  sudo dpkg --install atom.deb
 
   # set up atom packages
   apm install jsformat
